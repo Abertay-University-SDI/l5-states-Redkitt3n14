@@ -12,9 +12,12 @@ public:
 private:
     sf::Texture m_texture;
     sf::Vector2f m_acceleration;
+    sf::Vector2f m_previousPos;
     bool m_isOnGround = false;
 
     const float GRAVITY = 10.f;
     const float SPEED = 10.f;
+    const float JUMP_FORCE = 5.f;
+
 };
 

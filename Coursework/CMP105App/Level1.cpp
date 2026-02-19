@@ -65,6 +65,15 @@ void Level1::update(float dt)
 {
 	m_player.update(dt);
 	
+	// collision code
+	std::vector<GameObject>& tiles = *m_tileMap.getLevel();
+	for (auto& t : tiles) 
+	{
+		if (t.isCollider() && Collision::checkBoundingBox(m_player, t)) 
+		{
+			m_player.collisionResponse(t);
+		}
+	}
 }
 
 // Render Level1
