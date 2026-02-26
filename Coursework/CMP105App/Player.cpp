@@ -40,7 +40,7 @@ void Player::update(float dt)
 	// updates saved previous position before applying any changes
 	m_previousPos = getPosition();
 
-	// newtonian model
+	// newtonian model motion
 	m_acceleration.y += GRAVITY;
 	m_isOnGround = false;
 	m_velocity += dt * m_acceleration;
@@ -54,9 +54,14 @@ void Player::collisionResponse(GameObject& collider)
 	sf::FloatRect playerCollider = getCollisionBox();
 	sf::FloatRect otherCollider = collider.getCollisionBox();
 	auto overlap = playerCollider.findIntersection(otherCollider);
-	if (!overlap) return;
+	if (!overlap) return; // redundancy to ensure there is valid overlap
 
-	if (overlap->size.x > overlap->size.y) { // is overlap wider than tall (aka on ground)
+	// historical data
+	float oldBottom = m_previousPos.y + playerCollider.size.y;
+	float tileTop = otherCollider.position.y;
+
+	// floor landing check? (base was above tile)
+	if (oldBottom <= tileTop){
 
 		// falling begins, but it hits ground
 		if (m_velocity.y > 0)
@@ -66,8 +71,15 @@ void Player::collisionResponse(GameObject& collider)
 			m_isOnGround = true;
 		}
 	}
+	// wall handler
 	else {
-		m_velocity.x = 
+
+		m_velocity.x *= -COEFF_RESTITUTION; // bounce off
+		// fix with MTV
+		if (playerCollider.position.x < otherCollider.position.x)
+			setPosition({ getPosition().x - overlap->size.x, getPosition().y });
+		else
+			setPosition({ getPosition().x + overlap->size.x, getPosition().y });
 	}
 	
 

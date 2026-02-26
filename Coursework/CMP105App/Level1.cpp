@@ -23,7 +23,10 @@ Level1::Level1(sf::RenderWindow& hwnd, Input& in, GameState& gs) :
 			// size
 			{tile_size, tile_size }		
 		});
-		tile.setCollider(true);
+		if (i == 66 || i == 112 || i == 131) // should they have collision? (no flag or switch)
+			tile.setCollider(false);
+		else
+			tile.setCollider(true);
 		tileSet.push_back(tile);
 	}
 
@@ -34,11 +37,11 @@ Level1::Level1(sf::RenderWindow& hwnd, Input& in, GameState& gs) :
 	tileSet.push_back(tile);
 
 	std::vector<int> tileMapLocations{
-		b,	b,	20,	b,	66,	b,	b,	b,	b,	112,
-		b,	21, 104,22,	22,23,	b,	b,	b,	131,
-		1,	142,142,142,142,142,3,	b,	81,	83
+		b,	b,	20,	b,	b,	b,	b,  b,	b,	b,	112,b,
+		b,	21, 104,22,	22, 22, 23, b,	b, 	66,	131,b,
+		1,	142,142,142,142,142,142,3,	b,	81,	83,	b,
 	};
-	sf::Vector2u mapSize = { 10, 3 };
+	sf::Vector2u mapSize = { 12, 3 };
 
 	m_tileMap.setPosition({ 0,200 });
 	m_tileMap.loadTexture("gfx/tilemap.png");
