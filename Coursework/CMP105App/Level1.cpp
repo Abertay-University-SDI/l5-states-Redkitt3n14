@@ -23,7 +23,7 @@ Level1::Level1(sf::RenderWindow& hwnd, Input& in, GameState& gs) :
 			// size
 			{tile_size, tile_size }		
 		});
-		if (i == 66 || i == 112 || i == 131) // should they have collision? (no flag or switch)
+		if (i == 66 || i == 67 || i == 68 || i == 112 || i == 113 || i == 131) // should they have collision? (no flag or switch)
 			tile.setCollider(false);
 		else
 			tile.setCollider(true);
