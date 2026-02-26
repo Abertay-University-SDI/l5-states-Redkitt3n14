@@ -33,6 +33,7 @@ void Player::handleInput(float dt)
 		setPosition({ 50,0 });
 		m_velocity = { 0,0 };
 	}
+
 }
 
 void Player::update(float dt)
@@ -42,9 +43,21 @@ void Player::update(float dt)
 
 	// newtonian model motion
 	m_acceleration.y += GRAVITY;
-	m_isOnGround = false;
 	m_velocity += dt * m_acceleration;
+	if (m_isOnGround) // less drag when not on ground
+		m_velocity.x *= DRAG;
+	else
+		m_velocity.x *= (1 - (0.5 * (1 - DRAG)));
+	m_isOnGround = false;
 	move(m_velocity);
+
+
+	// lever handler
+	sf::Vector2f leverDistance = { (getPosition().x - m_lever->getPosition().x) , (getPosition().y - m_lever->getPosition().y) };
+
+	if ((leverDistance.x * leverDistance.x) + (leverDistance.y * leverDistance.y) < 50 * 50)
+		if (m_input->isKeyDown(sf::Keyboard::Scancode::F))
+			m_acceleration.x += SPEED;
 
 }
 

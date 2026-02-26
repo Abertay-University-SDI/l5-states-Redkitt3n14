@@ -20,9 +20,10 @@ private:
     bool m_isOnGround = false;
 
     const float GRAVITY = 10.f;
-    const float SPEED = 10.f;
+    const float SPEED = 12.f;
     const float JUMP_FORCE = 6.0f;
-    const float COEFF_RESTITUTION = 0.8f;
+    const float COEFF_RESTITUTION = 0.2f;
+    const float DRAG = 0.97f;
 
     GameObject* m_lever; // interactive lever
     GameObject* m_flagT; // top of flag

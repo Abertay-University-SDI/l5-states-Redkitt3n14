@@ -191,6 +191,7 @@ sfml-network.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClCompile Include="Framework\Input.cpp" />
     <ClCompile Include="Framework\GameObject.cpp" />
     <ClCompile Include="Framework\TileMap.cpp" />
+    <ClCompile Include="InteractGameObject.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -204,6 +205,7 @@ sfml-network.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="Framework\Input.h" />
     <ClInclude Include="Framework\GameObject.h" />
     <ClInclude Include="Framework\TileMap.h" />
+    <ClInclude Include="InteractGameObject.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
